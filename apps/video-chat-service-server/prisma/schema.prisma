@@ -1,0 +1,45 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ChatSessions {
+  id                     String              @id @default(cuid())
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  startTime              DateTime?
+  endTime                DateTime?
+  user1                  String?
+  user2                  String?
+  sessionId              String?
+  webRtcConnectionsItems WebRtcConnections[]
+}
+
+model WebRtcConnections {
+  id            String        @id @default(cuid())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  isActive      Boolean?
+  connectionId  String?
+  user          User?         @relation(fields: [userId], references: [id])
+  userId        String?
+  chatSession   ChatSessions? @relation(fields: [chatSessionId], references: [id])
+  chatSessionId String?
+}
+
+model User {
+  id                     String              @id @default(cuid())
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  firstName              String?
+  lastName               String?
+  username               String              @unique
+  email                  String?             @unique
+  password               String
+  roles                  Json
+  webRtcConnectionsItems WebRtcConnections[]
+}

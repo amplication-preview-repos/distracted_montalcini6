@@ -17,6 +17,10 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
+import { SignalList } from "./signal/SignalList";
+import { SignalCreate } from "./signal/SignalCreate";
+import { SignalEdit } from "./signal/SignalEdit";
+import { SignalShow } from "./signal/SignalShow";
 import { httpAuthProvider } from "./auth-provider/ra-auth-http";
 
 const App = (): React.ReactElement => {
@@ -63,6 +67,13 @@ const App = (): React.ReactElement => {
           edit={UserEdit}
           create={UserCreate}
           show={UserShow}
+        />
+        <Resource
+          name="Signal"
+          list={SignalList}
+          edit={SignalEdit}
+          create={SignalCreate}
+          show={SignalShow}
         />
       </Admin>
     </div>

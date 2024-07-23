@@ -43,3 +43,13 @@ model User {
   roles                  Json
   webRtcConnectionsItems WebRtcConnections[]
 }
+
+model Signal {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  senderId   String?
+  receiverId String?
+  signal     Json?
+  sessionId  String?
+}

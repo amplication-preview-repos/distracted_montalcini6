@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ChatSessionsModule } from "./chatSessions/chatSessions.module";
 import { WebRtcConnectionsModule } from "./webRtcConnections/webRtcConnections.module";
 import { UserModule } from "./user/user.module";
+import { SignalModule } from "./signal/signal.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -22,6 +23,7 @@ import { AuthModule } from "./auth/auth.module";
     ChatSessionsModule,
     WebRtcConnectionsModule,
     UserModule,
+    SignalModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

@@ -28,6 +28,7 @@ import { UpdateWebRtcConnectionsArgs } from "./UpdateWebRtcConnectionsArgs";
 import { DeleteWebRtcConnectionsArgs } from "./DeleteWebRtcConnectionsArgs";
 import { User } from "../../user/base/User";
 import { ChatSessions } from "../../chatSessions/base/ChatSessions";
+import { WebRtcConnectionsCreateInput } from "./WebRtcConnectionsCreateInput";
 import { WebRtcConnectionsService } from "../webRtcConnections.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => WebRtcConnections)
@@ -212,5 +213,21 @@ export class WebRtcConnectionsResolverBase {
       return null;
     }
     return result;
+  }
+
+  @graphql.Mutation(() => WebRtcConnectionsCreateInput)
+  async CreateWebRtcConnection(
+    @graphql.Args()
+    args: WebRtcConnectionsCreateInput
+  ): Promise<WebRtcConnectionsCreateInput> {
+    return this.service.CreateWebRtcConnection(args);
+  }
+
+  @graphql.Query(() => [WebRtcConnectionsFindManyArgs])
+  async GetAllWebRtcConnections(
+    @graphql.Args()
+    args: WebRtcConnectionsFindManyArgs
+  ): Promise<WebRtcConnectionsFindManyArgs[]> {
+    return this.service.GetAllWebRtcConnections(args);
   }
 }

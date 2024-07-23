@@ -320,4 +320,38 @@ export class ChatSessionsControllerBase {
       select: { id: true },
     });
   }
+
+  @common.Post("/chatsessions")
+  @swagger.ApiOkResponse({
+    type: ChatSessionsCreateInput,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async CreateChatSession(
+    @common.Body()
+    body: ChatSessionsFindManyArgs
+  ): Promise<ChatSessionsCreateInput> {
+    return this.service.CreateChatSession(body);
+  }
+
+  @common.Get("/chatsessions")
+  @swagger.ApiOkResponse({
+    type: ChatSessionsFindManyArgs,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetAllChatSessions(
+    @common.Body()
+    body: ChatSessionsFindManyArgs
+  ): Promise<ChatSessionsFindManyArgs[]> {
+    return this.service.GetAllChatSessions(body);
+  }
 }

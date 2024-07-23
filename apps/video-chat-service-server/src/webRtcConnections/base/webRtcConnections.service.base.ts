@@ -18,6 +18,9 @@ import {
   ChatSessions as PrismaChatSessions,
 } from "@prisma/client";
 
+import { WebRtcConnectionsCreateInput } from "./WebRtcConnectionsCreateInput";
+import { WebRtcConnectionsFindManyArgs } from "./WebRtcConnectionsFindManyArgs";
+
 export class WebRtcConnectionsServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
@@ -67,5 +70,15 @@ export class WebRtcConnectionsServiceBase {
         where: { id: parentId },
       })
       .chatSession();
+  }
+  async CreateWebRtcConnection(
+    args: WebRtcConnectionsCreateInput
+  ): Promise<WebRtcConnectionsCreateInput> {
+    throw new Error("Not implemented");
+  }
+  async GetAllWebRtcConnections(
+    args: WebRtcConnectionsFindManyArgs
+  ): Promise<WebRtcConnectionsFindManyArgs[]> {
+    throw new Error("Not implemented");
   }
 }

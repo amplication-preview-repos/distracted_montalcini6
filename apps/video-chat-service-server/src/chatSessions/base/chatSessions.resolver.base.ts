@@ -28,6 +28,7 @@ import { UpdateChatSessionsArgs } from "./UpdateChatSessionsArgs";
 import { DeleteChatSessionsArgs } from "./DeleteChatSessionsArgs";
 import { WebRtcConnectionsFindManyArgs } from "../../webRtcConnections/base/WebRtcConnectionsFindManyArgs";
 import { WebRtcConnections } from "../../webRtcConnections/base/WebRtcConnections";
+import { ChatSessionsCreateInput } from "./ChatSessionsCreateInput";
 import { ChatSessionsService } from "../chatSessions.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => ChatSessions)
@@ -167,5 +168,21 @@ export class ChatSessionsResolverBase {
     }
 
     return results;
+  }
+
+  @graphql.Mutation(() => ChatSessionsCreateInput)
+  async CreateChatSession(
+    @graphql.Args()
+    args: ChatSessionsCreateInput
+  ): Promise<ChatSessionsCreateInput> {
+    return this.service.CreateChatSession(args);
+  }
+
+  @graphql.Query(() => [ChatSessionsFindManyArgs])
+  async GetAllChatSessions(
+    @graphql.Args()
+    args: ChatSessionsFindManyArgs
+  ): Promise<ChatSessionsFindManyArgs[]> {
+    return this.service.GetAllChatSessions(args);
   }
 }

@@ -281,4 +281,38 @@ export class WebRtcConnectionsControllerBase {
       throw error;
     }
   }
+
+  @common.Post("/webrtc-connections")
+  @swagger.ApiOkResponse({
+    type: WebRtcConnectionsCreateInput,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async CreateWebRtcConnection(
+    @common.Body()
+    body: WebRtcConnectionsFindManyArgs
+  ): Promise<WebRtcConnectionsCreateInput> {
+    return this.service.CreateWebRtcConnection(body);
+  }
+
+  @common.Get("/webrtc-connections")
+  @swagger.ApiOkResponse({
+    type: WebRtcConnectionsFindManyArgs,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetAllWebRtcConnections(
+    @common.Body()
+    body: WebRtcConnectionsFindManyArgs
+  ): Promise<WebRtcConnectionsFindManyArgs[]> {
+    return this.service.GetAllWebRtcConnections(body);
+  }
 }
